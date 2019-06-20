@@ -98,10 +98,15 @@ class Game {
     }
 
     hideElements() {
-        $('.your-char-header').hide();
-        $('.enemies-header').hide();
+        $('#player .content').empty();
+        $('#enemies .content').empty();
+        $('#defender .content').empty();
+        $('#message').text('');
+        $('#player').hide();
+        $('#enemies').hide();
         $('#attack').hide();
-        $('.defender-header').hide();
+        $('#defender').hide();
+        $('#characters').show();
     }
 
     attachEventHandlers() {
@@ -128,17 +133,17 @@ class Game {
                 .removeClass('character')
                 .addClass('player')
                 .remove();
-            $('#selected-character').append(selected);
+            $('#player .content').append(selected);
 
             // Move remaining characters to enemies section
             let enemies = $('.character').remove();
             enemies.removeClass('character').addClass('enemy');
-            $('#enemies').append(enemies);
+            $('#enemies .content').append(enemies);
 
             // Toggle headers visibility
-            $('.chars-header').hide();
-            $('.your-char-header').show();
-            $('.enemies-header').show();
+            $('#characters').hide();
+            $('#player').show();
+            $('#enemies').show();
         });
 
         // Handle click events on available enemy
@@ -164,13 +169,13 @@ class Game {
                 .removeClass('enemy')
                 .addClass('defender')
                 .remove();
-            $('#defender').append(selected);
+            $('#defender .content').append(selected);
 
             let enemies = $('.enemy').remove();
 
             // Toggle headers visibility
-            $('.enemies-header').hide();
-            $('.defender-header').show();
+            $('#enemies').hide();
+            $('#defender').show();
             $('#attack').show();
         });
 
@@ -178,6 +183,10 @@ class Game {
             // Get player and defender
             let player = this.playerCharacter;
             let defender = this.enemyCharacter;
+
+            if (player === null || defender == null) {
+                return;
+            }
 
             // Player and defender attack eachother
             let playerDmg = player.attack(defender);
@@ -188,7 +197,7 @@ class Game {
             // Update status message
             let msg = `You attack ${defender.name} for ${playerDmg} damage.\n
             ${defender.name} attacks you back for ${defenderDmg} damage`;
-            $('#message').text(msg);
+            $('#message').html(`<p>${msg}</p>`);
 
             if (!this.canAttack()) {
                 this.init();

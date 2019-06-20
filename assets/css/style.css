@@ -8,6 +8,10 @@ h2 {
     font-weight: bold;
     margin: 10px 0;
 }
+
+p {
+    margin: 10px 0;
+}
 .container {
     width: 90%;
     margin: 0 auto;
@@ -40,4 +44,9 @@ img {
 }
 button {
     padding: 10px;
+    margin: 10px 0;
+}
+
+body {
+    text-align: center;
 }
