@@ -1,0 +1,43 @@
+h1 {
+    font-size: 40px;
+    text-align: center;
+    margin: 20px auto;
+}
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+.characters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.character,
+.player,
+.enemy,
+.defender {
+    text-align: center;
+    margin: 5px;
+    display: inline-block;
+}
+
+.player img {
+    border: 3px solid green;
+}
+.enemy img {
+    border: 3px solid yellow;
+}
+.defender img {
+    border: 3px solid red;
+}
+img {
+    width: 100px;
+}
+button {
+    padding: 10px;
+}
