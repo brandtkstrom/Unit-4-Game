@@ -1,11 +1,11 @@
 html,
 body {
     font-family: 'IBM Plex Sans', sans-serif;
+    text-align: center;
     background-image: url(../images/background.jpg);
     background-size: cover;
     color: rgb(255, 255, 255);
 }
-
 h1,
 h2 {
     font-weight: bold;
@@ -15,7 +15,6 @@ h2 {
     padding: 10px;
     border-radius: 10px;
 }
-
 h1 {
     width: 100%;
     font-size: 40px;
@@ -32,8 +31,22 @@ figure {
     border-radius: 10px;
     font-weight: bold;
 }
-p {
+figcaption {
+    text-align: center;
+}
+img {
+    width: 100px;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+button {
+    padding: 10px 20px;
     margin: 10px 0;
+    font-size: 18px;
+}
+#message {
+    font-weight: bold;
+    font-size: 20px;
 }
 .container {
     width: 90%;
@@ -53,17 +66,11 @@ p {
     margin: 5px;
     display: inline-block;
 }
-
-figcaption {
-    text-align: center;
-}
-
 .health,
 .power {
     margin-right: 10px;
     text-align: right;
 }
-
 .character img {
     border: 2px solid rgb(255, 255, 255);
 }
@@ -75,22 +82,4 @@ figcaption {
 }
 .defender img {
     border: 2px solid rgb(255, 0, 0);
-}
-img {
-    width: 100px;
-    margin: 5px 0;
-    border-radius: 10px;
-}
-button {
-    padding: 10px 20px;
-    margin: 10px 0;
-    font-size: 18px;
-}
-
-body {
-    text-align: center;
-}
-#message {
-    font-weight: bold;
-    font-size: 20px;
 }
