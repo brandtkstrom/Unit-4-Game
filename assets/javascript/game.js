@@ -90,7 +90,8 @@ class Game {
                 45,
                 false,
                 'assets/images/maul.png'
-            )
+            ),
+            new Character('Anakin', 40, 10, false, 'assets/images/anakin.png')
         ];
 
         return characters;
