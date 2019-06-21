@@ -91,7 +91,7 @@ class Game {
                 false,
                 'assets/images/maul.png'
             ),
-            new Character('Anakin', 40, 10, false, 'assets/images/anakin.png')
+            new Character('Anakin', 50, 15, false, 'assets/images/anakin.png')
         ];
 
         return characters;
