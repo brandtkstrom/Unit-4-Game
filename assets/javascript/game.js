@@ -21,7 +21,7 @@ class Player extends Character {
     }
 
     attack(character) {
-        let currentAttackPower = this.attackPower;
+        let currentAttackPower = new Number(this.attackPower);
         let newHealth = character.healthPoints - currentAttackPower;
         character.healthPoints = Math.max(0, newHealth);
         this.attackPower += this.baseAttack;
@@ -63,30 +63,30 @@ class Game {
         let characters = [
             new Character(
                 'Obi-Wan Kenobi',
-                120,
+                150,
                 20,
                 false,
                 'assets/images/obi-wan.png'
             ),
             new Character(
                 'Luke Skywalker',
-                100,
+                125,
                 15,
                 false,
                 'assets/images/luke.png'
             ),
-            new Character('Yoda', 130, 55, false, 'assets/images/yoda.png'),
+            new Character('Yoda', 100, 35, false, 'assets/images/yoda.png'),
             new Character(
                 'Darth Vader',
                 180,
-                50,
+                40,
                 false,
                 'assets/images/vader.png'
             ),
             new Character(
                 'Darth Maul',
                 150,
-                35,
+                45,
                 false,
                 'assets/images/maul.png'
             )
@@ -195,17 +195,25 @@ class Game {
             let defender = this.enemyCharacter;
 
             // Make sure both characters are set...
-            if (!this.fighting || player === null || defender == null) {
-                $('#message').text('Select an enemy!');
+            if (!this.fighting || player === null) {
+                if (defender == null) {
+                    $('#message').text('Select an enemy!');
+                } else {
+                    $('#attack').hide();
+                }
                 return;
             } else {
                 $('#message').text('');
+                $('#attack').show();
             }
 
             // Player and defender attack eachother
             let playerDmg = player.attack(defender);
-            let defenderDmg = defender.attack(player);
-
+            let defenderDmg = 0;
+            if (!defender.defeated()) {
+                // Defender will attack back if not defeated
+                defenderDmg = defender.attack(player);
+            }
             // Update player and defender stats
             player.update();
             defender.update();
@@ -247,7 +255,7 @@ class Game {
     }
 
     fillCharacters() {
-        $('#characters').empty();
+        $('#characters .content').empty();
         this.characters.forEach(character => {
             let figure = $('<figure>')
                 .html(`<img src="${character.image}">`)
@@ -267,11 +275,11 @@ class Game {
                 .text(character.baseAttack)
                 .addClass('power');
             let health = $('<figcaption>')
-                .append(heart)
-                .append(healthSpan);
+                .append(healthSpan)
+                .append(heart);
             let power = $('<figcaption>')
-                .append(fist)
-                .append(powerSpan);
+                .append(powerSpan)
+                .append(fist);
             figure.prepend(caption);
             figure.append(health);
             figure.append(power);

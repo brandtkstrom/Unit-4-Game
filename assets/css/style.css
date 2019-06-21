@@ -4,11 +4,12 @@ body {
 }
 h1 {
     font-size: 40px;
+    font-weight: bold;
     text-align: center;
     margin: 20px auto;
 }
 h2 {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     margin: 10px 0;
 }
@@ -21,7 +22,11 @@ p {
 }
 .container {
     width: 90%;
-    margin: 0 auto;
+    margin: 30px auto;
+    padding-bottom: 20px;
+    /* background-color: #555;
+    color: #ddd;
+    border-radius: 30%; */
 }
 .characters {
     display: flex;
@@ -39,13 +44,13 @@ p {
 
 figcaption {
     margin-left: 5px;
-    text-align: left;
+    text-align: center;
 }
 
 .health,
 .power {
     margin-right: 10px;
-    float: right;
+    text-align: right;
 }
 .player img {
     border: 3px solid green;
@@ -58,12 +63,19 @@ figcaption {
 }
 img {
     width: 100px;
+    margin: 5px 0;
+    border-radius: 10px;
 }
 button {
-    padding: 10px;
+    padding: 10px 20px;
     margin: 10px 0;
+    font-size: 18px;
 }
 
 body {
     text-align: center;
+}
+#message {
+    font-weight: bold;
+    font-size: 20px;
 }
