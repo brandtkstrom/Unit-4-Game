@@ -1,21 +1,36 @@
 html,
 body {
     font-family: 'IBM Plex Sans', sans-serif;
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+    color: rgb(255, 255, 255);
 }
-h1 {
-    font-size: 40px;
+
+h1,
+h2 {
     font-weight: bold;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+h1 {
+    width: 100%;
+    font-size: 40px;
     margin: 20px auto;
 }
 h2 {
     font-size: 25px;
-    font-weight: bold;
     margin: 10px 0;
 }
 figure {
     width: 125px;
     padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    font-weight: bold;
 }
 p {
     margin: 10px 0;
@@ -24,9 +39,6 @@ p {
     width: 90%;
     margin: 30px auto;
     padding-bottom: 20px;
-    /* background-color: #555;
-    color: #ddd;
-    border-radius: 30%; */
 }
 .characters {
     display: flex;
@@ -43,7 +55,6 @@ p {
 }
 
 figcaption {
-    margin-left: 5px;
     text-align: center;
 }
 
@@ -52,14 +63,18 @@ figcaption {
     margin-right: 10px;
     text-align: right;
 }
+
+.character img {
+    border: 2px solid rgb(255, 255, 255);
+}
 .player img {
-    border: 3px solid green;
+    border: 2px solid rgb(0, 255, 0);
 }
 .enemy img {
-    border: 3px solid yellow;
+    border: 2px solid rgb(255, 255, 0);
 }
 .defender img {
-    border: 3px solid red;
+    border: 2px solid rgb(255, 0, 0);
 }
 img {
     width: 100px;
