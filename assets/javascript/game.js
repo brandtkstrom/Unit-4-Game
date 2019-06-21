@@ -21,7 +21,7 @@ class Player extends Character {
     }
 
     attack(character) {
-        let currentAttackPower = new Number(this.attackPower);
+        let currentAttackPower = this.attackPower;
         let newHealth = character.healthPoints - currentAttackPower;
         character.healthPoints = Math.max(0, newHealth);
         this.attackPower += this.baseAttack;
@@ -55,8 +55,8 @@ class Game {
     constructor() {
         this.characters = [];
         this.fighting = false;
-        this.playerCharacter = null;
-        this.enemyCharacter = null;
+        this.playerCharacter = undefined;
+        this.enemyCharacter = undefined;
     }
 
     createCharacters() {
@@ -99,8 +99,8 @@ class Game {
     init() {
         this.characters = this.createCharacters();
         this.fighting = false;
-        this.playerCharacter = null;
-        this.enemyCharacter = null;
+        this.playerCharacter = undefined;
+        this.enemyCharacter = undefined;
         this.hideElements();
         this.fillCharacters();
         this.attachEventHandlers();
@@ -122,7 +122,7 @@ class Game {
         // Handle click event on available characters
         $('#characters').on('click', '.character', evt => {
             // If character already selected, do nothing
-            if (this.playerCharacter != null) {
+            if (this.playerCharacter) {
                 return;
             }
 
@@ -158,7 +158,7 @@ class Game {
         // Handle click events on available enemy
         $('#enemies').on('click', '.enemy', evt => {
             // If defender already selected, do nothing
-            if (this.enemyCharacter != null) {
+            if (this.enemyCharacter) {
                 return;
             }
             $('#message').text('');
@@ -189,14 +189,14 @@ class Game {
             $('#attack').show();
         });
 
-        $('#attack').on('click', () => {
+        $('button#attack').on('click', () => {
             // Get player and defender
             let player = this.playerCharacter;
             let defender = this.enemyCharacter;
 
             // Make sure both characters are set...
-            if (!this.fighting || player === null) {
-                if (defender == null) {
+            if (!this.fighting || !player) {
+                if (!defender) {
                     $('#message').text('Select an enemy!');
                 } else {
                     $('#attack').hide();
@@ -222,7 +222,7 @@ class Game {
             let msg = '';
             if (defender.defeated()) {
                 // this.characters = this.characters.filter(c => c.name !== defender.name);
-                this.enemyCharacter = null;
+                this.enemyCharacter = undefined;
                 this.fighting = false;
 
                 // Check to see if all enemies have been defeated (game won)
@@ -285,14 +285,6 @@ class Game {
             figure.append(power);
             $('#characters').append(figure);
         });
-    }
-
-    characterSelect(character) {
-        if (this.playerCharacter === null) {
-            selectPlayer(character);
-        } else if (this.enemyCharacter === null) {
-            selectEnemy(character);
-        }
     }
 }
 
