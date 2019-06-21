@@ -57,6 +57,7 @@ class Game {
         this.fighting = false;
         this.playerCharacter = undefined;
         this.enemyCharacter = undefined;
+        this.attachEventHandlers();
     }
 
     createCharacters() {
@@ -103,7 +104,6 @@ class Game {
         this.enemyCharacter = undefined;
         this.hideElements();
         this.fillCharacters();
-        this.attachEventHandlers();
     }
 
     hideElements() {
@@ -189,7 +189,7 @@ class Game {
             $('#attack').show();
         });
 
-        $('button#attack').on('click', () => {
+        $('button#attack').on('click', evt => {
             // Get player and defender
             let player = this.playerCharacter;
             let defender = this.enemyCharacter;
