@@ -11,3 +11,5 @@ Press the attack button to attack. You will damage the defender by an amount equ
 You win the game by defeating all the remaining characters. If your character's health reaches 0, then you lose and the game will reset.
 
 Have fun!
+
+Deployed Here: https://brandtkstrom.github.io/Unit-4-Game/
