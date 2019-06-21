@@ -1,3 +1,7 @@
+html,
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
 h1 {
     font-size: 40px;
     text-align: center;
@@ -8,7 +12,10 @@ h2 {
     font-weight: bold;
     margin: 10px 0;
 }
-
+figure {
+    width: 125px;
+    padding: 10px;
+}
 p {
     margin: 10px 0;
 }
@@ -30,6 +37,16 @@ p {
     display: inline-block;
 }
 
+figcaption {
+    margin-left: 5px;
+    text-align: left;
+}
+
+.health,
+.power {
+    margin-right: 10px;
+    float: right;
+}
 .player img {
     border: 3px solid green;
 }

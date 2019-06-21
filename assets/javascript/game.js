@@ -3,6 +3,7 @@ class Character {
     constructor(name, healthPoints, attackPower, isPlayer, image) {
         this.name = name;
         this.healthPoints = healthPoints;
+        this.attackPower = attackPower;
         this.baseAttack = attackPower;
         this.isPlayer = isPlayer;
         this.image = image;
@@ -17,7 +18,6 @@ class Character {
 class Player extends Character {
     constructor(name, healthPoints, attackPower) {
         super(name, healthPoints, attackPower, true);
-        this.attackPower = attackPower;
     }
 
     attack(character) {
@@ -26,6 +26,11 @@ class Player extends Character {
         character.healthPoints = Math.max(0, newHealth);
         this.attackPower += this.baseAttack;
         return currentAttackPower;
+    }
+
+    update() {
+        $('.player .health').text(this.healthPoints);
+        $('.player .power').text(this.attackPower);
     }
 }
 
@@ -40,12 +45,16 @@ class Enemy extends Character {
         character.healthPoints = Math.max(0, newHealth);
         return this.baseAttack;
     }
+
+    update() {
+        $('.defender .health').text(this.healthPoints);
+    }
 }
 
 class Game {
     constructor() {
         this.characters = [];
-        this.started = false;
+        this.fighting = false;
         this.playerCharacter = null;
         this.enemyCharacter = null;
     }
@@ -89,7 +98,7 @@ class Game {
     // need a funcion to init game for new games and restarts
     init() {
         this.characters = this.createCharacters();
-        this.started = false;
+        this.fighting = false;
         this.playerCharacter = null;
         this.enemyCharacter = null;
         this.hideElements();
@@ -152,6 +161,7 @@ class Game {
             if (this.enemyCharacter != null) {
                 return;
             }
+            $('#message').text('');
 
             // Get clicked enemy
             let enemy = $(evt.currentTarget);
@@ -171,7 +181,7 @@ class Game {
                 .remove();
             $('#defender .content').append(selected);
 
-            let enemies = $('.enemy').remove();
+            this.fighting = true;
 
             // Toggle headers visibility
             $('#enemies').hide();
@@ -184,48 +194,89 @@ class Game {
             let player = this.playerCharacter;
             let defender = this.enemyCharacter;
 
-            if (player === null || defender == null) {
+            // Make sure both characters are set...
+            if (!this.fighting || player === null || defender == null) {
+                $('#message').text('Select an enemy!');
                 return;
+            } else {
+                $('#message').text('');
             }
 
             // Player and defender attack eachother
             let playerDmg = player.attack(defender);
             let defenderDmg = defender.attack(player);
 
+            // Update player and defender stats
+            player.update();
+            defender.update();
+
             // Check to see if player or defender defeated
+            let msg = '';
+            if (defender.defeated()) {
+                // this.characters = this.characters.filter(c => c.name !== defender.name);
+                this.enemyCharacter = null;
+                this.fighting = false;
+
+                // Check to see if all enemies have been defeated (game won)
+                let enemyCt = $('.enemy').length;
+                console.log(enemyCt + ' enemies left.');
+                if (enemyCt === 0) {
+                    alert('You defeated all the enemies. You win!');
+                    this.init();
+                    return;
+                }
+
+                // Remove defeated defender, update screen for new selection
+                msg = `You defeated ${defender.name}! Select new opponent.`;
+                $('.defender').remove();
+                $('#enemies').show();
+                $('#defender').hide();
+            } else if (player.defeated()) {
+                // Player defeated... notify and reset game
+                alert('You have been defeated! Try again.');
+                this.init();
+            } else {
+                // Nodoby defeated - output message with attack stats
+                msg = `You attack ${defender.name} for ${playerDmg} damage.\n
+                ${defender.name} attacks you back for ${defenderDmg} damage`;
+            }
 
             // Update status message
-            let msg = `You attack ${defender.name} for ${playerDmg} damage.\n
-            ${defender.name} attacks you back for ${defenderDmg} damage`;
-            $('#message').html(`<p>${msg}</p>`);
-
-            if (!this.canAttack()) {
-                this.init();
-            }
+            $('#message').text(msg);
         });
     }
 
     fillCharacters() {
+        $('#characters').empty();
         this.characters.forEach(character => {
             let figure = $('<figure>')
                 .html(`<img src="${character.image}">`)
                 .addClass('character')
-                .attr('name', character.name);
+                .attr({
+                    name: character.name,
+                    health: character.healthPoints,
+                    power: character.attackPower
+                });
+            let heart = $('<i>').addClass('fas fa-heartbeat');
+            let fist = $('<i>').addClass('fas fa-fist-raised');
             let caption = $('<figcaption>').text(character.name);
-            let health = $('<figcaption>').text(character.healthPoints);
+            let healthSpan = $('<span>')
+                .text(character.healthPoints)
+                .addClass('health');
+            let powerSpan = $('<span>')
+                .text(character.baseAttack)
+                .addClass('power');
+            let health = $('<figcaption>')
+                .append(heart)
+                .append(healthSpan);
+            let power = $('<figcaption>')
+                .append(fist)
+                .append(powerSpan);
             figure.prepend(caption);
             figure.append(health);
+            figure.append(power);
             $('#characters').append(figure);
         });
-    }
-
-    canAttack() {
-        return (
-            this.playerCharacter &&
-            this.playerCharacter.healthPoints > 0 &&
-            this.enemyCharacter &&
-            this.enemyCharacter.healthPoints > 0
-        );
     }
 
     characterSelect(character) {
@@ -235,24 +286,6 @@ class Game {
             selectEnemy(character);
         }
     }
-
-    selectPlayer(character) {}
-    selectEnemy(character) {}
-
-    // select character - remaining become enemies
-    // move characters to appropriate locations
-
-    // select enemy sets defender
-    // moves enemy to defender area
-    // now able to attack
-    // update values (call attack) -> udpdate screen
-    // display damage to target, and counter attack damage back
-
-    // if lose, print message and display "restart" button
-
-    // if win, clear enemy, display message to choose next enemy
-    // press attack with no enemy shows message
-    // click enemy to select new enemy -> move to location
 }
 
 window.addEventListener('DOMContentLoaded', () => {
