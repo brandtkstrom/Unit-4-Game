@@ -31,6 +31,10 @@ class Player extends Character {
             });
         }
 
+        $('#defender .health')
+            .animate({ color: 'rgb(255,0,0)' }, 500)
+            .animate({ color: 'rgb(255,255,255)' }, 500);
+
         let currentAttackPower = this.attackPower;
         let newHealth = character.healthPoints - currentAttackPower;
         character.healthPoints = Math.max(0, newHealth);
@@ -53,6 +57,10 @@ class Enemy extends Character {
     }
 
     attack(character) {
+        $('#player .health')
+            .animate({ color: 'rgb(255,0,0)' }, 500)
+            .animate({ color: 'rgb(255,255,255)' }, 500);
+
         let newHealth = character.healthPoints - this.baseAttack;
         character.healthPoints = Math.max(0, newHealth);
         return this.baseAttack;
