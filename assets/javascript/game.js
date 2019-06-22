@@ -83,7 +83,7 @@ class Game {
             ),
             new Character(
                 'Luke Skywalker',
-                125,
+                140,
                 30,
                 false,
                 'assets/images/luke.png'
@@ -91,7 +91,7 @@ class Game {
             new Character('Yoda', 100, 35, false, 'assets/images/yoda.png'),
             new Character(
                 'Darth Vader',
-                180,
+                200,
                 20,
                 false,
                 'assets/images/vader.png'
