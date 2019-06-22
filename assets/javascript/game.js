@@ -31,6 +31,9 @@ class Player extends Character {
             });
         }
 
+        $('#player .power')
+            .animate({ color: 'rgb(0,255,0)' }, 500)
+            .animate({ color: 'rgb(255,255,255)' }, 500);
         $('#defender .health')
             .animate({ color: 'rgb(255,0,0)' }, 500)
             .animate({ color: 'rgb(255,255,255)' }, 500);
