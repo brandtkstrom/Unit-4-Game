@@ -88,6 +88,11 @@ button {
 .character img {
     border: 2px solid rgb(255, 255, 255);
 }
+.character:hover,
+.enemy:hover {
+    background-color: rgb(0, 0, 0);
+    transition: 200ms linear;
+}
 .player img {
     border: 2px solid rgb(0, 255, 0);
 }
