@@ -24,7 +24,12 @@ class Player extends Character {
 
     attack(character) {
         saber.currentTime = 0;
-        saber.play();
+        let playPromise = saber.play();
+        if (playPromise !== null) {
+            playPromise.catch(() => {
+                saber.play();
+            });
+        }
 
         let currentAttackPower = this.attackPower;
         let newHealth = character.healthPoints - currentAttackPower;
@@ -235,7 +240,6 @@ class Game {
 
                 // Check to see if all enemies have been defeated (game won)
                 let enemyCt = $('.enemy').length;
-                console.log(enemyCt + ' enemies left.');
                 if (enemyCt === 0) {
                     alert('You defeated all the enemies. You win!');
                     this.init();
