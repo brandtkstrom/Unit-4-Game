@@ -85,14 +85,14 @@ class Game {
             new Character(
                 'Obi-Wan Kenobi',
                 150,
-                20,
+                10,
                 false,
                 'assets/images/obi-wan.png'
             ),
             new Character(
                 'Luke Skywalker',
                 140,
-                30,
+                15,
                 false,
                 'assets/images/luke.png'
             ),
@@ -100,18 +100,18 @@ class Game {
             new Character(
                 'Darth Vader',
                 200,
-                20,
+                10,
                 false,
                 'assets/images/vader.png'
             ),
             new Character(
                 'Darth Maul',
                 150,
-                45,
+                25,
                 false,
                 'assets/images/maul.png'
             ),
-            new Character('Anakin', 50, 15, false, 'assets/images/anakin.png')
+            new Character('Anakin', 50, 5, false, 'assets/images/anakin.png')
         ];
 
         return characters;
