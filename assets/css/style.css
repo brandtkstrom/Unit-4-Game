@@ -2,9 +2,14 @@ html,
 body {
     font-family: 'IBM Plex Sans', sans-serif;
     text-align: center;
+    color: rgb(255, 255, 255);
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
     background-image: url(../images/background.jpg);
     background-size: cover;
-    color: rgb(255, 255, 255);
 }
 h1,
 h2 {
@@ -34,6 +39,15 @@ figure {
 figcaption {
     text-align: center;
 }
+footer {
+    flex-shrink: 0;
+    height: 40px;
+    width: 100%;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-top: 20px;
+    vertical-align: middle;
+}
 img {
     width: 100px;
     margin: 5px 0;
@@ -50,8 +64,8 @@ button {
 }
 .container {
     width: 90%;
-    margin: 30px auto;
-    padding-bottom: 20px;
+    flex: 1 0 auto;
+    margin: 0 auto;
 }
 .characters {
     display: flex;

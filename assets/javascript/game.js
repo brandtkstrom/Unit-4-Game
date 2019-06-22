@@ -1,3 +1,5 @@
+const saber = new Audio('assets/media/saber.wav');
+
 // Base character class
 class Character {
     constructor(name, healthPoints, attackPower, isPlayer, image) {
@@ -21,10 +23,15 @@ class Player extends Character {
     }
 
     attack(character) {
+        saber.currentTime = 0;
+        saber.play();
+
         let currentAttackPower = this.attackPower;
         let newHealth = character.healthPoints - currentAttackPower;
         character.healthPoints = Math.max(0, newHealth);
+
         this.attackPower += this.baseAttack;
+
         return currentAttackPower;
     }
 
@@ -246,8 +253,9 @@ class Game {
                 this.init();
             } else {
                 // Nodoby defeated - output message with attack stats
-                msg = `You attack ${defender.name} for ${playerDmg} damage.\n
-                ${defender.name} attacks you back for ${defenderDmg} damage`;
+                msg = `You attack ${defender.name} for ${playerDmg} damage. ${
+                    defender.name
+                } attacks you back for ${defenderDmg} damage.`;
             }
 
             // Update status message
@@ -290,7 +298,7 @@ class Game {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded and parsed');
+    saber.load();
     const game = new Game();
     game.init();
 });
